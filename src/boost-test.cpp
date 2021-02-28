@@ -9,9 +9,11 @@
 
 boost::thread_specific_ptr<int> ptr;
 
+#if 0
 // https://www.boost.org/doc/libs/1_60_0/libs/context/doc/html/context/context.html
 #include <boost/context/all.hpp>
 boost::context::fcontext_t fcm,fc1,fc2;
+#endif
 
 void test_thread()
 {
@@ -21,6 +23,7 @@ void test_thread()
     std::cout << "Hello, World! from thread" << std::endl;
 }
 
+#if 0
 void f1(intptr_t)
 {
     std::cout<<"f1: entered"<<std::endl;
@@ -62,3 +65,15 @@ int main(int argc, char *argv[])
 
     return 0;
 }
+#else
+int main(int argc, char *argv[])
+{
+    (void)argc;
+    (void)argv;
+
+    boost::thread thrd(test_thread);
+    thrd.join();
+    
+    return 0;
+}
+#endif

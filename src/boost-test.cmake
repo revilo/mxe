@@ -7,6 +7,7 @@ set(TGT test-${PKG}-cmake)
 enable_language(CXX)
 add_executable(${TGT} ${CMAKE_CURRENT_LIST_DIR}/${PKG}-test.cpp)
 
+set(Boost_COMPILER "-x32")
 find_package(Boost ${PKG_VERSION} EXACT COMPONENTS chrono context serialization system thread REQUIRED)
 target_link_libraries(${TGT} ${Boost_LIBRARIES})
 
